@@ -8,4 +8,5 @@ public interface IUserService
 {
     public Task<UserModel> AddUserAsync(NewUseDto dto);
     void EditUserAsync(EditUserVm vm);
+    void RemoveUserAsync(Guid id);
 }

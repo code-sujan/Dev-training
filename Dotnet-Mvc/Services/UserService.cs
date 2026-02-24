@@ -1,4 +1,5 @@
 ﻿using Dotnet_Mvc.Dtos;
+using Dotnet_Mvc.Enums;
 using Dotnet_Mvc.Models;
 using Dotnet_Mvc.Services.Interface;
 using Dotnet_Mvc.ViewModel;
@@ -36,6 +37,19 @@ public class UserService : IUserService
             details.UserName = vm.UserName;
             details.Email = vm.Email;
             details.Address = vm.Address;
+        }
+    }
+
+    public void RemoveUserAsync(Guid id)
+    {
+        var userData = _list.FirstOrDefault(x => x.Id == id);
+        if (userData != null)
+        {
+            userData.Status = (int)StatusEnum.Inactive;
+        }
+        else
+        {
+            throw new Exception("User not found");
         }
     }
 }
