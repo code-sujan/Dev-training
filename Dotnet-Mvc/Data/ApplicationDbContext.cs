@@ -3,12 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet_Mvc.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext(IConfiguration configuration) : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder
+            .UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
     }
 
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> User { get; set; }
 }

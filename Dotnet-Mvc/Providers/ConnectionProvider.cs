@@ -7,7 +7,7 @@ namespace Dotnet_Mvc.Providers
     {
         private static string? _connectionString;
 
-        public static string? Initialize(IConfiguration configuration)
+        public static string? GetConnectionString(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
             return _connectionString;
